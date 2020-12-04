@@ -443,8 +443,7 @@ elif sys.argv[1] == 'predict':
             original_img = preprocess(original_img)
         acc = get_pred_acc(sess, original_img, label)
         accs.append(acc)
-        print(acc, label)
-    print(np.mean(acc))
+    print("Accuracy", np.mean(accs))
     
     
 elif sys.argv[1] == 'latent':
@@ -502,17 +501,20 @@ elif sys.argv[1] == 'train':
         sess.run(tf.global_variables_initializer())
     else:
         saver.restore(sess, sys.argv[2])
-    training_mode = "e2e"
+    training_mode = "ae"
     loss_history = []
     best_model = np.inf
     import time
     train_image, label = get_train_minibatch()
-    for _ in range(100000):
+    for _ in range(20000):
         img = sample_time_sequence(train_image)
         start_time = time.time()
+        if _ > 7000:
+            training_mode = 'seq'
+        elif _ > 12000:
+            training_mode = 'e2e'
+            
         if training_mode == 'e2e':
-            # ae_loss = train_image_ae(sess, img)
-            # seq_loss = train_seq2seq(sess, img)
             train_image_ae(sess, img)
             train_seq2seq(sess, img)
             loss = train_prediction(sess, img, label)
@@ -522,8 +524,7 @@ elif sys.argv[1] == 'train':
         elif training_mode == 'seq':
             loss = train_seq2seq(sess, img)
         loss_history.append(loss)
-        # print(ae_loss, seq_loss, pred_loss)
-        if _ % 2 == 0:
+        if _ % 10 == 0:
             print("Mode: {}, Iteration: {}, Mean Loss: {}".format(training_mode, _, np.mean(loss_history)))
             loss_history = []
             train_image, label = get_train_minibatch()

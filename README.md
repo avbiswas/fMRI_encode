@@ -1,6 +1,32 @@
 # fMRI_encode
 
-Steps to run:
+
+
+### Running on Palmetto:
+
+To run in palmetto, first get a compute node:
+qsub -I -l select=1:ncpus=28:mem=120gb:ngpus=1:gpu_model=p100,walltime=72:00:00
+
+Load these modules:
+module add anaconda3/5.1.0-gcc/8.3.1
+module load cudnn/7.6.5.32-10.2-linux-x64-gcc/8.3.1-cuda10_2
+module add openmpi/3.1.6-gcc/8.3.1-cuda10_2-ucx
+module add glew/2.0.0-gcc/8.3.1
+
+source activate <conda_env>
+
+
+You need the below modules to run the code:
+nibabel
+tensorflow 1.15
+numpy
+pickle
+json
+
+
+
+
+### Steps to run:
 
 1. Download the ABIDE dataset using the below command:
 python download_abide_preproc.py -t NYU -p cpac -s filt_global -o NYU_dataset_fMRI -d func_preproc
@@ -18,7 +44,7 @@ mkdir reconstructed
 mkdir models
 
 
-4. To train a ML classifier, run the fmri_attention-e2e.py. Below are the functionalites:
+4. To train a ML classifier, run the fmri_attention-e2e.py. Below are the functionalites: (Use palmetto to train.)
 	python fmri_attention-e2e.py train --> Start a new training session (You may need to create a new directory). The new model will be saved in the models/ directory
 	
 	python fmri_attention-e2e.py train models/model_folder/model.ckpt --> Restore this model and train from here.
@@ -51,8 +77,5 @@ python supervised_training-CNN.py
 
 
 Feel free to reach out to us in case of issues!!
-
-
-
 
 	
