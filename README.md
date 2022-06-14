@@ -1,7 +1,5 @@
 # fMRI_encode
 
-CPSC 8420: Advanced Machine Learning
-
 Avishek Biswas (avisheb@clemson.edu)
 Foram Joshi (fjoshi@clemson.edu)
 
