@@ -7,18 +7,6 @@ Foram Joshi (fjoshi@clemson.edu)
 
 ### Running on Palmetto:
 
-To run in palmetto, first get a compute node:<br>
-qsub -I -l select=1:ncpus=28:mem=120gb:ngpus=1:gpu_model=p100,walltime=72:00:00
-
-Load these modules:
-module add anaconda3/5.1.0-gcc/8.3.1<br>
-module load cudnn/7.6.5.32-10.2-linux-x64-gcc/8.3.1-cuda10_2<br>
-module add openmpi/3.1.6-gcc/8.3.1-cuda10_2-ucx<br>
-module add glew/2.0.0-gcc/8.3.1<br>
-<br>
-source activate <conda_env><br>
-
-
 You need the below modules to run the code:
 nibabel
 tensorflow 1.15
