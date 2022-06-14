@@ -34,15 +34,15 @@ mkdir models
 
 
 5. To train a ML classifier, run the fmri_attention-e2e.py. Below are the functionalites: (Use palmetto to train.)
-	python fmri_attention-e2e.py train --> Start a new training session (You may need to create a new directory). The new model will be saved in the models/ directory
+	`python fmri_attention-e2e.py train` --> Start a new training session (You may need to create a new directory). The new model will be saved in the models/ directory
 	
-	python fmri_attention-e2e.py train models/model_folder/model.ckpt --> Restore this model and train from here.
+	`python fmri_attention-e2e.py train models/model_folder/model.ckpt` --> Restore this model and train from here.
 
-	python fmri_attention-e2e.py viz models/model_folder/model.ckpt --> Take a random test image and produce reconstruction (with seq2seq and image). Images will be stored in the reconstructed directory (You may need to create this directory)
+	`python fmri_attention-e2e.py viz models/model_folder/model.ckpt` --> Take a random test image and produce reconstruction (with seq2seq and image). Images will be stored in the reconstructed directory (You may need to create this directory)
 
-	python fmri_attention-e2e.py latent models/model_folder/model.ckpt ---> Generate latent representation (seq2seq final encoder state) and store in latent directory (You may need to create this directory)
+	`python fmri_attention-e2e.py latent models/model_folder/model.ckpt` ---> Generate latent representation (seq2seq final encoder state) and store in latent directory (You may need to create this directory)
 
-	python fmri_attention-e2e.py predict models/model_folder/model.ckpt ---> Get test case predictions. (use only if e2e training was done).
+	`python fmri_attention-e2e.py predict models/model_folder/model.ckpt` ---> Get test case predictions. (use only if e2e training was done).
 
 
 6. If only unsupervised training is required, just comment the below lines in the fmri_attention-e2e.py:
@@ -52,7 +52,7 @@ elif _ > 12000:
 
 
 7. To train supervised training classifier, use:
-	First run: python fmri_attention-e2e.py latent models/model_folder/model.ckpt  -> This will generate latent representations
+	First run: `python fmri_attention-e2e.py latent models/model_folder/model.ckpt`  -> This will generate latent representations
 	Then run: python supervised_learning.py
 
 8. To change the preprocessing and model type, change the below lines in supervised_learning.py
@@ -62,7 +62,7 @@ model_types = ['LR', 'RF', 'LDA', 'KNN', 'MLP']
 
 9. To train CNN model on latent space seperately, use:
 
-python supervised_training-CNN.py
+`python supervised_training-CNN.py`
 
 
 Feel free to reach out to us in case of issues!!
